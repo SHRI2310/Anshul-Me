@@ -33,7 +33,7 @@ export const insuranceApi = tryCatch(async (req, res, next) => {
     email,
   }
 
-  const fields = ["fname","lname","dateOfBirth","mobile","email"]
+  const fields = ["fName","lName","dateOfBirth","mobile","email"]
 
   for(let field of fields){
     if (!data[field]) {
@@ -41,23 +41,23 @@ export const insuranceApi = tryCatch(async (req, res, next) => {
     }
   }
 
-  if (!fName.match(/^[a-zA-Z]{2,20}$/)) {
-    return next(new Error(`First Name only contain letters`, 400));
-  }
-  if (!lName.match(/^[a-zA-Z]{2,20}$/)) {
-    return next(new Error(`First Name only contain letters`, 400));
-  }
-  if (!isPhone(mobile)) {
-    return next(new Error(`Please provide Indian valid number`, 400));
-  }
-  if (!isEmail(email)) {
-    return next(new Error(`Email is not valid`, 400));
-  }
+  // if (!fName.match(/^[a-zA-Z]{2,20}$/)) {
+  //   return next(new Error(`First Name only contain letters`, 400));
+  // }
+  // if (!lName.match(/^[a-zA-Z]{2,20}$/)) {
+  //   return next(new Error(`First Name only contain letters`, 400));
+  // }
+  // if (!isPhone(mobile)) {
+  //   return next(new Error(`Please provide Indian valid number`, 400));
+  // }
+  // if (!isEmail(email)) {
+  //   return next(new Error(`Email is not valid`, 400));
+  // }
 
-  const isEmailUnique = await User.findOne({ email });
-  if (isEmailUnique) {
-    return next(new Error(`This email is already registered`, 400));
-  }
+  // const isEmailUnique = await User.findOne({ email });
+  // if (isEmailUnique) {
+  //   return next(new Error(`This email is already registered`, 400));
+  // }
 
   user = await User.create(user);
 
@@ -100,19 +100,21 @@ export const insuranceApi = tryCatch(async (req, res, next) => {
     
 
   ).then((response) => {
-     console.log(response.data)
-    console.log(response.data.access_token)
-    let xyz=axios.post("https://sandbox-in-gw.insuremo.com/riabroker/1.0/broker-bff-app/v1/getQuote",{
+    //  console.log(response.data)
+    console.log(response.data.access_token,"hiee I am token")
+    let xyz = axios.post("https://sandbox-in-gw.insuremo.com/riabroker/1.0/broker-bff-app/v1/getQuote",{
        Headers:{
          "Content-Type": "application/json",
          "Authorization":  response.data.access_token,
        }
+     }).catch(err=>{
+      console.log(err);
      })
+
+     console.log(xyz.Headers, "I amxyz")
   })
-  // return res.send()
+  return res.send()
   
-
-
 
 
 })
