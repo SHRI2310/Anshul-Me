@@ -17,7 +17,7 @@ insurerName:{
 frequency:{
     type:String,
     required:true ,
-    enum:["Monthly","Half yearly","Yearly"]  
+    
 },
 premium:{
     type:String,
@@ -48,4 +48,4 @@ userId : {
 
 })
 
-export  default mongoose.model("Quote",quoteSchema)
+export const Quote = mongoose.model("Quote",quoteSchema)
