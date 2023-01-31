@@ -4,7 +4,7 @@ import tryCatch from "../middleware/tryCatch.js";
 import Error from "../utils/error.js"
 import axios from "axios";
 import { isEmail, isPhone } from "../utils/validation.js"
-import { json } from "express";
+
 
 
 export const insuranceApi = tryCatch(async (req, res, next) => {
@@ -86,6 +86,7 @@ export const insuranceApi = tryCatch(async (req, res, next) => {
     
     for (let field of quotefield) {
       if (!data[field]) {
+        await User.findByIdAndDelete(user._id)  
         return next(new Error(`Please provide ${field} field`, 400));
     }
   }
@@ -207,7 +208,7 @@ export let finalQuote = async (req, res) => {
       },
       { headers: { "Content-Type": "application/json" } },
     )
-    console.log(axios1.data, "==================================================...................................>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    // console.log(axios1.data);
     
     
     let url = "https://sandbox-in-gw.insuremo.com/riabroker/1.0/broker-bff-app/v1/finalQuote";
@@ -270,4 +271,12 @@ export let finalQuote = async (req, res) => {
 
 
 
+// *<<<<<<<<<<<<<<<<<<--------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!------------------------------>>>>>>>>>>
 
+export const filterApi = tryCatch(async (req, res, next) => {
+
+ const {frequency,ppt,term,payOutFrequency}  = req.query
+
+   const filter = await Quote.find({ $or: [ { frequency:frequency }, { ppt:ppt }, { term:term },{payOutFrequency:payOutFrequency} ] })
+    res.send(filter)
+})
