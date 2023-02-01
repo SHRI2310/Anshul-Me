@@ -33,16 +33,16 @@ export const insuranceApi = tryCatch(async (req, res, next) => {
     mobile,
     email,
   }
-  
+
   const fields = ["fName", "lName", "dateOfBirth", "mobile", "email"]
-  
+
   for (let field of fields) {
     if (!data[field]) {
       return next(new Error(`Please provide ${field} field`, 400));
     }
   }
 
-  
+
   if (!fName.match(/^[a-zA-Z]{2,20}$/)) {
     return next(new Error(`First Name only contain letters`, 400));
   }
@@ -55,14 +55,14 @@ export const insuranceApi = tryCatch(async (req, res, next) => {
   if (!isEmail(email)) {
     return next(new Error(`Email is not valid`, 400));
   }
-  
+
   const isEmailUnique = await User.findOne({ email });
   if (isEmailUnique) {
     return next(new Error(`This email is already registered`, 400));
   }
 
   user = await User.create(user);
-  
+
   let createQuote = {
     salesChannelCode,
     carrierCode,
@@ -74,23 +74,23 @@ export const insuranceApi = tryCatch(async (req, res, next) => {
     payOutFrequency,
     userId: user._id
   }
-  
+
   const quotefield = ["salesChannelCode",
-  "carrierCode",
+    "carrierCode",
     "insurerName",
     "frequency",
     "premium",
     "ppt",
     "term",
     "payOutFrequency"]
-    
-    for (let field of quotefield) {
-      if (!data[field]) {
-        await User.findByIdAndDelete(user._id)  
-        return next(new Error(`Please provide ${field} field`, 400));
+
+  for (let field of quotefield) {
+    if (!data[field]) {
+      await User.findByIdAndDelete(user._id)
+      return next(new Error(`Please provide ${field} field`, 400));
     }
   }
-  
+
   createQuote = await Quote.create(createQuote)
 
   const expectedData = await Quote.findOne({ email }).populate("userId")
@@ -104,7 +104,7 @@ export const insuranceApi = tryCatch(async (req, res, next) => {
     { headers: { "Content-Type": "application/json" } },
   )
     .then(async (response) => {
-   
+
       let bodyData = {
         "SalesChannelCode": createQuote.salesChannelCode,
         "CarrierCode": createQuote.carrierCode,
@@ -147,7 +147,7 @@ export const insuranceApi = tryCatch(async (req, res, next) => {
           }
 
         }).then((nData) => {
-         
+
           return res.send(nData.data)
         }).catch(err1 => {
           // console.log(err1, "from here")
@@ -173,9 +173,9 @@ export let finalQuote = async (req, res) => {
     let body = req.body
     console.log("hello i am running")
     // const data = req.body
-    const { 
+    const {
       EffectiveDate,
-      CarrierProductId, 
+      CarrierProductId,
       CarrierPlanId,
       Plan,
       CarrierCode,
@@ -188,17 +188,17 @@ export let finalQuote = async (req, res) => {
       PPT,
       TouchPoint,
       AgentCode,
-      QniProduct, 
+      QniProduct,
       PayOutFrequency,
       PolicyLobList: [
         {
           PolicyRiskList: [
-            { FirstName, LastName,Email,MobileNo, DateOfBirth }
+            { FirstName, LastName, Email, MobileNo, DateOfBirth }
           ]
         }
       ]
     } = body;
-    
+
     // console.log(body)
     let axios1 = await axios.post("https://riabroker-gi-sandbox-in.insuremo.com/v1/json/tickets",
 
@@ -209,8 +209,8 @@ export let finalQuote = async (req, res) => {
       { headers: { "Content-Type": "application/json" } },
     )
     // console.log(axios1.data);
-    
-    
+
+
     let url = "https://sandbox-in-gw.insuremo.com/riabroker/1.0/broker-bff-app/v1/finalQuote";
     let bodyData = {
       "EffectiveDate": EffectiveDate,
@@ -233,9 +233,9 @@ export let finalQuote = async (req, res) => {
         {
           "PolicyRiskList": [
             {
-              "FirstName":FirstName,
+              "FirstName": FirstName,
               "LastName": LastName,
-              "Email":"",
+              "Email": "",
               "MobileNo": MobileNo,
               "DateOfBirth": DateOfBirth
             }
@@ -245,24 +245,24 @@ export let finalQuote = async (req, res) => {
     }
 
     let config = {
-      headers:{
-      "Content-Type": "application/json",
-      "Content-Length": bodyData.length,
-      // "Host":"localHost",
-      "User-Agent": "PostmanRuntime/7.30.0",
-      "Accept": "*/*",
-      "Accept-Encoding": "gzip,deflate,br",
-      "Connection": "keep-alive",
-      "Authorization": `Bearer ${axios1?.data?.access_token}`,
+      headers: {
+        "Content-Type": "application/json",
+        "Content-Length": bodyData.length,
+        // "Host":"localHost",
+        "User-Agent": "PostmanRuntime/7.30.0",
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip,deflate,br",
+        "Connection": "keep-alive",
+        "Authorization": `Bearer ${axios1?.data?.access_token}`,
 
 
-    }
-  };
+      }
+    };
     // console.log(config.Authorization,config["Content-Length"], ".............>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-     
-      let axios2 = await axios.post(url, bodyData, config)
-      console.log(axios2.data)
-     return res.status(200).send(axios2.data)
+
+    let axios2 = await axios.post(url, bodyData, config)
+    console.log(axios2.data)
+    return res.status(200).send(axios2.data)
   } catch (error) {
     console.log(error);
     return res.status(500).send(error.message)
@@ -275,8 +275,97 @@ export let finalQuote = async (req, res) => {
 
 export const filterApi = tryCatch(async (req, res, next) => {
 
- const {frequency,ppt,term,payOutFrequency}  = req.query
+  //  const {frequency,ppt,term,payOutFrequency}  = req.query
 
-   const filter = await Quote.find({ $or: [ { frequency:frequency }, { ppt:ppt }, { term:term },{payOutFrequency:payOutFrequency} ] })
-    res.send(filter)
+  //    const filter = await Quote.find({ $or: [ { frequency:frequency }, { ppt:ppt }, { term:term },{payOutFrequency:payOutFrequency} ] })
+  //     res.send(filter)
+
+
+
+  const data = req.body;
+  const {
+    fName,
+    lName,
+    dateOfBirth,
+    mobile,
+    email,
+    salesChannelCode,
+    carrierCode,
+    insurerName,
+    frequency,
+    premium,
+    ppt,
+    term,
+    payOutFrequency,
+  } = data;
+
+  let da = await axios
+    .post(
+      "https://riabroker-gi-sandbox-in.insuremo.com/v1/json/tickets",
+
+      {
+        username: "ebao.riabroker",
+        password: "X@rsi999",
+      },
+      { headers: { "Content-Type": "application/json" } }
+    )
+    .then(async (response) => {
+      let bodyData = {
+        SalesChannelCode: salesChannelCode,
+        CarrierCode: carrierCode,
+        InsurerName: insurerName,
+        Frequency: frequency,
+        Premium: premium,
+        Term: term,
+        PPT: ppt,
+        PayoutFrequency: payOutFrequency,
+        PolicyLobList: [
+          {
+            PolicyRiskList: [
+              {
+                FirstName: fName,
+                LastName: lName,
+                DateOfBirth: dateOfBirth,
+                Mobile: mobile,
+                Email: email,
+              },
+            ],
+          },
+        ],
+      };
+      //  console.log(JSON.stringify(bodyData, null, 4))
+      // console.log(response?.data?.access_token, "hiee I am token")
+      await axios
+        .post(
+          "https://sandbox-in-gw.insuremo.com/riabroker/1.0/broker-bff-app/v1/getQuote",
+          bodyData,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Content-Length": bodyData.length,
+              // "Host":"localHost",
+              "User-Agent": "PostmanRuntime/7.30.0",
+              "Accept": "*/*",
+              "Accept-Encoding": "gzip,deflate,br",
+              "Connection": "keep-alive",
+              "Authorization": `Bearer ${response?.data?.access_token}`,
+      
+      
+            }
+          }
+        )
+        .then((nData) => {
+          return res.send(nData.data);
+        })
+        .catch((err1) => {
+          // console.log(err1, "from here")
+          return res.status(500).send({ status: false, mssage: err1.message });
+        });
+    })
+    .catch((err) => {
+      // console.log(err)
+      return res.send(err.message);
+    });
+
+
 })

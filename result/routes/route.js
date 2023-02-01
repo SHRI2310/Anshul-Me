@@ -4,7 +4,7 @@ import {  finalQuote, insuranceApi ,filterApi} from "../controllers/insuranceCon
 const router = express.Router()
 
 router.post("/createQuote",insuranceApi)
-router.get("/filter",filterApi)
+router.post("/filter",filterApi)
 // router.post("/test",test)
 // router.get("/students/:Id/result",getStudent)
 // router.get("/del", deleteAll)

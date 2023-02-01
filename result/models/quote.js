@@ -6,10 +6,6 @@ const quoteSchema = new mongoose.Schema({
         type:String,
         trim:true
     },
-    carrierCode:{
-        type:String,
-       required:true
-    },
 insurerName:{
     type:String,
     required:true,
