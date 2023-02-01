@@ -8,3 +8,11 @@ export const isEmail = function (email) {
   };
 
  
+  export const isAnswer = function(option){
+    let options= ["A","B","C","D"]
+        if(!(options.includes(option))){
+          return false
+        }
+   return true
+  }
+  

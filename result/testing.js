@@ -151,3 +151,39 @@
 // }
 
 
+
+
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+export const getCustomerProfile = tryCatch(async (req,res,next)=>{
+    let {cookieToken}=req.cookies
+    //  console.log(token)
+    
+     let url1 = "https://ambrelamoney.coherentlab.com" 
+
+     let {token,customerId}=req.query
+     console.log(cookieToken == token)
+     if(cookieToken != token){
+        return next(new Error(" you are Not authorised Token or POSPID is invalid", 400))
+     }
+     let checkCustomerId = "AC2301000024"
+
+     if( checkCustomerId != customerId){
+        return next(new Error(" you are Not authorised Token or POSPID is invalid", 400))
+     }
+    //  console.log(token1,"i am token 1",token==token1);
+     const data1={
+        token,
+        checkCustomerId
+     }
+    const config = {
+        headers: {
+            "content-type": "application/json",
+        }
+    }
+
+    // const sendData = await axios.post(url1, data1, config)
+    // console.log(sendData)
+    res.send(sendData)
+})
