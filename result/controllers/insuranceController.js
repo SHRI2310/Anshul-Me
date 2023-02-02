@@ -261,7 +261,7 @@ export let finalQuote = async (req, res) => {
     // console.log(config.Authorization,config["Content-Length"], ".............>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
     let axios2 = await axios.post(url, bodyData, config)
-    console.log(axios2.data)
+    console.log(axios2)
     return res.status(200).send(axios2.data)
   } catch (error) {
     console.log(error);

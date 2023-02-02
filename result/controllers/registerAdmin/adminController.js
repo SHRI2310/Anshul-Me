@@ -4,6 +4,7 @@ import jwt  from "jsonwebtoken"
 import { Mcq } from "../../models/adminModel/mcqModel.js"
 
 import { isAnswer } from "../../utils/validation.js"
+import { test } from "../../models/testmodel.js"
 
 
 export const register = async(req,res)=>{
@@ -187,9 +188,12 @@ export const deleteAll = async(req,res)=>{
 // }
 
 
-export const generateCertificate = async (req,res)=>{
+export const generateCertificate = async(req,res)=>{
 
-    try {
+
+    //  const getAgent = await test. 
+
+
         // const data =req.body
         const xyz ="helllo"
         
@@ -199,13 +203,7 @@ export const generateCertificate = async (req,res)=>{
         })
     
 
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json({
-            success: false,
-            message: error.message
-        })
-    }
+    
      
 
 }

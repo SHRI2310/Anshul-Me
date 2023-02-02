@@ -32,7 +32,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/api/getAgentProfile?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ik1TV2ViUmlhIiwibmJmIjoxNjc1MjM2NTAwLCJleHAiOjE2OTA5NjEzMDAsImlhdCI6MTY3NTIzNjUwMH0.Pvr1qJBoh1szyVmrGyJsMew5Fh96XzoNWE1otK7QiZ8&pospId=RIA205000002",
+							"raw": "localhost:4000/api/getAgentProfile?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ik1TV2ViUmlhIiwibmJmIjoxNjc1MzI2NjM3LCJleHAiOjE2OTEwNTE0MzcsImlhdCI6MTY3NTMyNjYzN30.KLQXTfqcR0Wp9OEieCekYZ0UQIWEJ8NxfJxIoHHOcyA&pospId=RIA205000002",
 							"host": [
 								"localhost"
 							],
@@ -44,7 +44,7 @@
 							"query": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ik1TV2ViUmlhIiwibmJmIjoxNjc1MjM2NTAwLCJleHAiOjE2OTA5NjEzMDAsImlhdCI6MTY3NTIzNjUwMH0.Pvr1qJBoh1szyVmrGyJsMew5Fh96XzoNWE1otK7QiZ8"
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ik1TV2ViUmlhIiwibmJmIjoxNjc1MzI2NjM3LCJleHAiOjE2OTEwNTE0MzcsImlhdCI6MTY3NTMyNjYzN30.KLQXTfqcR0Wp9OEieCekYZ0UQIWEJ8NxfJxIoHHOcyA"
 								},
 								{
 									"key": "pospId",
@@ -557,6 +557,29 @@
 									"value": "helllo",
 									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "question controller",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/showQue",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"showQue"
 							]
 						}
 					},

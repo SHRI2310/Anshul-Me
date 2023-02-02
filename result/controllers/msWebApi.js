@@ -2,6 +2,9 @@
 import tryCatch from "../middleware/tryCatch.js";
 import Error from "../utils/error.js"
 import axios from "axios";
+import { test } from "../models/testmodel.js";
+import mongoose from "mongoose";
+// export const test =mongoose.model("test",{})
 
 
 export const fetchAmbrelaData = tryCatch(async (req, res, next) => {
@@ -52,13 +55,10 @@ export  const getAgentProfile  = tryCatch(async(req,res,next)=>{
             // console.log(data)
             const sendData = await axios.get(url1,{params:params})
             // console.log(sendData.data)
-            res.send(sendData.data)
+            const saveData =await test.create(sendData.data)
+            // console.log(saveData)
+            res.status(200).cookie("id",sendData._id).send(sendData.data)
   
-
- 
-  
-  
-
 })
 
 
@@ -92,6 +92,7 @@ export  const getCustomerProfile  = tryCatch(async(req,res,next)=>{
            // console.log(data)
            const sendData = await axios.get(url1,{params:params})
            // console.log(sendData.data)
+           
            res.send(sendData.data)
  
 
