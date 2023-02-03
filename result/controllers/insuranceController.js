@@ -5,7 +5,7 @@ import Error from "../utils/error.js"
 import axios from "axios";
 import { isEmail, isPhone } from "../utils/validation.js"
 
-
+import mongoose from "mongoose";
 
 export const insuranceApi = tryCatch(async (req, res, next) => {
 
@@ -166,7 +166,8 @@ export const insuranceApi = tryCatch(async (req, res, next) => {
 
 //*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1------------------>>>>>>>>>>>>>>>>>>>>>>>>>
 
-
+const fQuoteSchema = new mongoose.Schema({}, { strict: false },{ timestamps: true,});
+ export const fQuoteData = mongoose.model('fQuoteData', fQuoteSchema);
 
 export let finalQuote = async (req, res) => {
   try {
@@ -261,7 +262,9 @@ export let finalQuote = async (req, res) => {
     // console.log(config.Authorization,config["Content-Length"], ".............>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
     let axios2 = await axios.post(url, bodyData, config)
-    console.log(axios2)
+    const  saveData =  await fQuoteData.create(axios2.data.PolicyObject)
+    console.log(saveData)
+    if(saveData) console.log( "data saved")
     return res.status(200).send(axios2.data)
   } catch (error) {
     console.log(error);

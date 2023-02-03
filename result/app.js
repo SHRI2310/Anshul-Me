@@ -5,6 +5,7 @@ import msWebApi from "./routes/msWebApi.js";
 import cookieParser from "cookie-parser";
 import adminRoute from "./routes/adminRoutes/route.js"
 import questionRoutes from "./routes/questionRoutes.js"
+import status from "./routes/statusCheckRoute.js"
 
 export const app= express()
 import {
@@ -26,6 +27,7 @@ app.use(cookieParser())
 app.use(express.json())
 app.use("/",route)
 app.use("/",msWebApi)
+app.use("/",status)
 app.use("/",adminRoute)
 app.use("/",questionRoutes)
 app.use(errorHandler)
