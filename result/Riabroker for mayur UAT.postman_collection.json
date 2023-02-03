@@ -1,0 +1,622 @@
+{
+	"info": {
+		"_postman_id": "d8a0bcea-8b7a-401d-941b-91fb0f8acaea",
+		"name": "Riabroker UAT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "msWebApi",
+			"item": [
+				{
+					"name": "ambrela  auth",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/ambrela",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"ambrela"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAgentProfile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/getAgentProfile?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ik1TV2ViUmlhIiwibmJmIjoxNjc1MzI2NjM3LCJleHAiOjE2OTEwNTE0MzcsImlhdCI6MTY3NTMyNjYzN30.KLQXTfqcR0Wp9OEieCekYZ0UQIWEJ8NxfJxIoHHOcyA&pospId=RIA205000002",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"getAgentProfile"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ik1TV2ViUmlhIiwibmJmIjoxNjc1MzI2NjM3LCJleHAiOjE2OTEwNTE0MzcsImlhdCI6MTY3NTMyNjYzN30.KLQXTfqcR0Wp9OEieCekYZ0UQIWEJ8NxfJxIoHHOcyA"
+								},
+								{
+									"key": "pospId",
+									"value": "RIA205000002"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "test api",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ambrelamoney.coherentlab.com/api/getAgentProfile?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ik1TV2ViUmlhIiwibmJmIjoxNjc1MTY4OTcxLCJleHAiOjE2OTA4OTM3NzEsImlhdCI6MTY3NTE2ODk3MX0.6yQc2pPRKN5uUjpP_j93K0AfKUR29zz2l_5YC3OIgjs&pospId=RIA205000002",
+							"protocol": "https",
+							"host": [
+								"ambrelamoney",
+								"coherentlab",
+								"com"
+							],
+							"path": [
+								"api",
+								"getAgentProfile"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ik1TV2ViUmlhIiwibmJmIjoxNjc1MTY4OTcxLCJleHAiOjE2OTA4OTM3NzEsImlhdCI6MTY3NTE2ODk3MX0.6yQc2pPRKN5uUjpP_j93K0AfKUR29zz2l_5YC3OIgjs"
+								},
+								{
+									"key": "pospId",
+									"value": "RIA205000002"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get customer profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/getCustomerProfile?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ik1TV2ViUmlhIiwibmJmIjoxNjc1MjM2NTAwLCJleHAiOjE2OTA5NjEzMDAsImlhdCI6MTY3NTIzNjUwMH0.Pvr1qJBoh1szyVmrGyJsMew5Fh96XzoNWE1otK7QiZ8&customerId=AC2301000024",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"getCustomerProfile"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ik1TV2ViUmlhIiwibmJmIjoxNjc1MjM2NTAwLCJleHAiOjE2OTA5NjEzMDAsImlhdCI6MTY3NTIzNjUwMH0.Pvr1qJBoh1szyVmrGyJsMew5Fh96XzoNWE1otK7QiZ8"
+								},
+								{
+									"key": "customerId",
+									"value": "AC2301000024"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin Apis",
+			"item": [
+				{
+					"name": "register user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n    {\r\n      \"title\":\"Mr\",\r\n        \"name\":\"Shrikant\",\r\n        \"middleName\":\"kishor\",\r\n        \"lastName\":\"Ajmire\",\r\n        \"address\":{\r\n            \"state\":\"Maharashtra\",\r\n            \"city\":\"Wardha\",\r\n            \"pincode\":\"442001\"\r\n        },\r\n        \"mobile\":\"8623087242\",\r\n         \"email\":\"shrikantajmire@gmail.com\",\r\n         \"password\":\"pass1234\",\r\n         \"bankName\":\"SBI\",\r\n         \"accountName\":\"SHRI AJMIRE \",\r\n         \"accountNumber\":\"123456778\",\r\n         \"IFSC\":\"12335\",\r\n         \"panCardNo\":\"12345\",\r\n         \"gstNumber\":\"98765\",\r\n         \"adharNumber\":\"987665544\"\r\n         ,\"qualification\":\"BHMCT\",\r\n         \"nominieeDetails\":\" my details\"\r\n        }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/route/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"route",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout user",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Questions",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Quote Api's",
+			"item": [
+				{
+					"name": "0.0. Cloud get token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"response Code [actual/expected] is \"+responseCode.code+\"/200\"]=responseCode.code===200;",
+									"var jsonData = JSON.parse(responseBody);",
+									"var access_token = jsonData.access_token;",
+									"postman.clearEnvironmentVariable(\"access_token\");",
+									"postman.setEnvironmentVariable(\"access_token\", access_token);",
+									"tests[\"access_token id is:\" + access_token] = true;"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-ebao-tenant-code",
+								"value": "riabroker",
+								"type": "text"
+							},
+							{
+								"key": "x-ebao-client-id",
+								"value": "pbu",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\":\"ebao.riabroker\",\r\n\t\"password\":\"X@rsi999\"\r\n}"
+						},
+						"url": {
+							"raw": "https://riabroker-gi-sandbox-in.insuremo.com/v1/json/tickets",
+							"protocol": "https",
+							"host": [
+								"riabroker-gi-sandbox-in",
+								"insuremo",
+								"com"
+							],
+							"path": [
+								"v1",
+								"json",
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "my Get Quote Api",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer o44hDs_TQwewcN_2dYdFnQ",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fName\":\"ShrikantTest\",\r\n    \"lName\":\"Ajmire\",\r\n    \"dateOfBirth\":\"1998-12-23\",\r\n    \"mobile\":\"9889013090\",\r\n    \"email\":\"soq988i@yomail.com\",\r\n     \"salesChannelCode\": \"1234455\",\r\n    \"carrierCode\": \"HDFC\",\r\n    \"insurerName\": \"HDFC Life\",\r\n    \"frequency\": \"4\",\r\n    \"premium\": \"45000\",\r\n    \"term\": \"12\",\r\n    \"ppt\": \"10\",\r\n    \"payOutFrequency\": \"Annual\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/createQuote",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"createQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetQuote",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData=JSON.parse(responseBody);\r",
+									"\r",
+									"tests[\"response Code is \"+responseCode.code]=responseCode.code===200;\r",
+									"\r",
+									"\r",
+									"postman.setEnvironmentVariable(\"PolicyNo\", jsonData.PolicyNo);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer N8z1GUL9T9me5xmGuPyuIA"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							},
+							{
+								"key": "user-agent",
+								"type": "text",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"SalesChannelCode\": \"\",\r\n    \"CarrierCode\": \"HDFC\",\r\n    \"InsurerName\": \"HDFC Life\",\r\n    \"Frequency\": \"4\",\r\n    \"Premium\": \"100000\",\r\n    \"Term\": \"12\",\r\n    \"PPT\": \"10\",\r\n    \"PolicyLobList\": [\r\n        {\r\n            \"PolicyRiskList\": [\r\n                {\r\n                    \"FirstName\": \"Anushrita Lee\",\r\n                    \"LastName\": \"LELO\",\r\n                    \"DateOfBirth\": \"1989-10-27\",\r\n                    \"Mobile\": \"8723652343\",\r\n                    \"Email\": \"shrinatha@gmail.com\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://sandbox-in-gw.insuremo.com/riabroker/1.0/broker-bff-app/v1/getQuote",
+							"protocol": "https",
+							"host": [
+								"sandbox-in-gw",
+								"insuremo",
+								"com"
+							],
+							"path": [
+								"riabroker",
+								"1.0",
+								"broker-bff-app",
+								"v1",
+								"getQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deeepakBhaiya",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"SalesChannelCode\": \"\",\r\n    \"CarrierCode\": \"HDFC\",\r\n    \"InsurerName\": \"HDFC Life\",\r\n    \"Frequency\": \"1\",\r\n    \"Premium\": \"45000\",\r\n    \"Term\": \"14\",\r\n    \"PPT\": \"9\",\r\n    \"PayoutFrequency\": \"Annual\",\r\n    \"PolicyLobList\": [\r\n        {\r\n            \"PolicyRiskList\": [\r\n                {\r\n                    \"FirstName\": \"Anushrita\",\r\n                    \"LastName\": \"Lee\",\r\n                    \"DateOfBirth\": \"1989-10-12\",\r\n                    \"Mobile\": \"\",\r\n                    \"Email\": \"\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "final Quote Api",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer gUsPIRppSVCpFsxm4sOhIA",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n          \"EffectiveDate\": \"2022-10-27\",\r\n          \"CarrierProductId\": \"SANCHP\",\r\n          \"CarrierPlanId\": \"\",\r\n         \"Plan\":\"Guaranteed Maturity\",\r\n          \"CarrierCode\": \"HDFC\",\r\n          \"InsurerName\": \"HDFC Life\",\r\n          \"Frequency\": \"1\",\r\n          \"SumAssured\": \"549000\",\r\n          \"ChannelPartner\": \"Agency Business Partner\",\r\n          \"Premium\": \"45000\",\r\n          \"Term\": \"12\",\r\n          \"PPT\": \"10\",\r\n          \"TouchPoint\": \"1\",\r\n          \"AgentCode\": \"00646100\",\r\n          \"QniProduct\": \"SANCHPV9\",\r\n          \"PayoutFrequency\": \"Annual\",\r\n          \"PolicyLobList\": [\r\n              {\r\n                  \"PolicyRiskList\": [\r\n                      {\r\n                          \"FirstName\": \"Anashul\",\r\n                          \"LastName\": \"Nagpure\",\r\n                          \"Email\": \"\",\r\n                          \"MobileNo\": \"8878074340\",\r\n                          \"DateOfBirth\": \"18/01/1989\"\r\n                      }\r\n                  ]\r\n              }\r\n          ]\r\n      }\r\n      ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/fQuote",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"fQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "finalQuote testing",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const options = {\r",
+									"    url: \"https://riabroker-gi-sandbox-in.insuremo.com/v1/json/tickets\",\r",
+									"    method: 'POST',\r",
+									"    header: { 'content-type': 'application/json' },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: {\r",
+									"\t\"username\":\"ebao.riabroker\",\r",
+									"\t\"password\":\"X@rsi999\"\r",
+									"}\r",
+									"\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.sendRequest(options, function (err, res) {\r",
+									"    var jsonData = res.json();\r",
+									"    if (err) {\r",
+									"        console.log(err);\r",
+									"    }\r",
+									"    else {\r",
+									"        pm.environment.set(\"access_token\", jsonData.access_token);\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"EffectiveDate\": \"2022-10-27T00:00:00\",\r\n    \"CarrierProductId\": \"SANCHP\",\r\n    \"CarrierPlanId\": \"\",\r\n\t\"Plan\":\"Guaranteed Maturity\",\r\n    \"CarrierCode\": \"HDFC\",\r\n    \"InsurerName\": \"HDFC Life\",\r\n    \"Frequency\": \"1\",\r\n    \"SumAssured\": \"549000\",\r\n    \"ChannelPartner\": \"Agency Business Partner\",\r\n    \"Premium\": \"45000\",\r\n    \"Term\": \"12\",\r\n    \"PPT\": \"10\",\r\n    \"TouchPoint\": \"1\",\r\n    \"AgentCode\": \"00646100\",\r\n    \"QniProduct\": \"SANCHPV9\",\r\n    \"PayoutFrequency\": \"Annual\",\r\n    \"PolicyLobList\": [\r\n        {\r\n            \"PolicyRiskList\": [\r\n                {\r\n                    \"FirstName\": \"Anushrita Lee\",\r\n                    \"LastName\": \"Lee\",\r\n                    \"Email\": \"\",\r\n                    \"MobileNo\": \"8878074340\",\r\n                    \"DateOfBirth\": \"18/01/1989\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://sandbox-in-gw.insuremo.com/riabroker/1.0/broker-bff-app/v1/finalQuote",
+							"protocol": "https",
+							"host": [
+								"sandbox-in-gw",
+								"insuremo",
+								"com"
+							],
+							"path": [
+								"riabroker",
+								"1.0",
+								"broker-bff-app",
+								"v1",
+								"finalQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "filterApi",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fName\":\"ShrikantTest\",\r\n    \"lName\":\"Ajmire\",\r\n    \"dateOfBirth\":\"1998-12-23\",\r\n    \"mobile\":\"8889013090\",\r\n    \"email\":\"shq988i@yomail.com\",\r\n     \"salesChannelCode\": \"1234455\",\r\n    \"carrierCode\": \"HDFC\",\r\n    \"insurerName\": \"HDFC Life\",\r\n    \"frequency\": \"4\",\r\n    \"premium\": \"45000\",\r\n    \"term\": \"12\",\r\n    \"ppt\": \"10\",\r\n    \"payOutFrequency\": \"Annual\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/filter",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"filter"
+							],
+							"query": [
+								{
+									"key": "frequency",
+									"value": "Annual",
+									"disabled": true
+								},
+								{
+									"key": "ppt",
+									"value": "anything",
+									"disabled": true
+								},
+								{
+									"key": "term",
+									"value": "kuchbhhi",
+									"disabled": true
+								},
+								{
+									"key": "payOutFrequency",
+									"value": "helllo",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "question controller",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/showQue",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"showQue"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New FoldeStatus check",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/del",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"del"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

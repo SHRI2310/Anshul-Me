@@ -4,8 +4,8 @@ import jwt  from "jsonwebtoken"
 import { Mcq } from "../../models/adminModel/mcqModel.js"
 
 import { isAnswer } from "../../utils/validation.js"
-import { test } from "../../models/testmodel.js"
-
+import { Agent } from "../../models/agentData.js"
+import tryCatch from "../../middleware/tryCatch.js"
 
 export const register = async(req,res)=>{
     try {
@@ -188,23 +188,4 @@ export const deleteAll = async(req,res)=>{
 // }
 
 
-export const generateCertificate = async(req,res)=>{
-
-
-    //  const getAgent = await test. 
-
-
-        // const data =req.body
-        const xyz ="helllo"
-        
-        res.render("index",{
-            CandidateName:xyz,
-            pan:"9876543"
-        })
-    
-
-    
-     
-
-}
 

@@ -53,3 +53,7 @@ export const redirect = tryCatch(async(req,res,next)=>{
 })
 
 
+
+ export  const stautusCheck = tryCatch(async(req,res,next)=>{
+    
+ })
