@@ -7,10 +7,11 @@ const mcqSchema = new mongoose.Schema({
     trim: true,
     required: true,
   },
+option:{  
   A: {
     type: String,
     trim: true,
-    default:""
+   
 
   },
   B: {
@@ -28,7 +29,7 @@ const mcqSchema = new mongoose.Schema({
     trim: true,
 
   },
-
+  },
   Answer: {
     type: String,
     enum:mcqAnswerEnum,

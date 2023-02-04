@@ -56,6 +56,10 @@ export const insuranceApi = tryCatch(async (req, res, next) => {
     return next(new Error(`Email is not valid`, 400));
   }
 
+  const isMobileUnique = await User.findOne({ mobile });
+  if (isMobileUnique) {
+    return next(new Error(`This mobile is already registered`, 400));
+  }
   const isEmailUnique = await User.findOne({ email });
   if (isEmailUnique) {
     return next(new Error(`This email is already registered`, 400));

@@ -77,7 +77,7 @@ const getAgent = await Agent.findById(id)
 
         // const data =req.body
         const xyz ="helllo"
-        console.log(getAgent.data.aadharNo);
+        // console.log(getAgent.data.aadharNo);
         res.render("index",{
             CandidateName:`${getAgent.data.firstName}  ${getAgent.data.lastName}`,
             panNo: getAgent.data.panNo,
