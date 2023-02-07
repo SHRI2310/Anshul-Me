@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { mcqAnswerEnum } from "../../common/static.js";
+ import { mcqAnswerEnum } from "../../common/static.js"
 
 const mcqSchema = new mongoose.Schema({
   question: {
@@ -28,8 +28,7 @@ option:{
     type: String,
     trim: true,
 
-  },
-  },
+  }},
   Answer: {
     type: String,
     enum:mcqAnswerEnum,

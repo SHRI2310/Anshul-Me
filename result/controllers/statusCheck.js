@@ -11,7 +11,9 @@ import { fQuoteData } from "./insuranceController.js"
 
 export const redirect = tryCatch(async(req,res,next)=>{
 
- let {QuotationNo}= req.body;
+//  let {QuotationNo}= req.body;
+let {QuotationNo}= req.body;
+
  
 
  let axios1 = await axios.post("https://riabroker-gi-sandbox-in.insuremo.com/v1/json/tickets",

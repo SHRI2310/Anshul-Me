@@ -8,7 +8,7 @@ import { isEmail, isPhone } from "../utils/validation.js"
 import mongoose from "mongoose";
 
 export const insuranceApi = tryCatch(async (req, res, next) => {
-
+console.log("running???");
   const data = req.body
   const { fName,
     lName,
