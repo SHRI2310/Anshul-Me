@@ -192,5 +192,16 @@
 
 
 
-option:[{A:1},{b:2},{c:3},{d:4}]
+// option:[{A:1},{b:2},{c:3},{d:4}]
+// function f(){
+//     var t = 10
+    
+//     return function g(){
+//         console.log(t)
+//     }
+   
+// }
 
+// let x = f()
+// let y = x()
+//  console.log(y())

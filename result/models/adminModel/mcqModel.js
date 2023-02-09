@@ -2,12 +2,16 @@ import mongoose from "mongoose";
  import { mcqAnswerEnum } from "../../common/static.js"
 
 const mcqSchema = new mongoose.Schema({
+  id:{
+    type:Number,
+    unique:true
+  },
   question: {
     type: String,
     trim: true,
     required: true,
   },
-option:{  
+options:{  
   A: {
     type: String,
     trim: true,
@@ -28,7 +32,9 @@ option:{
     type: String,
     trim: true,
 
-  }},
+  }
+}
+  ,
   Answer: {
     type: String,
     enum:mcqAnswerEnum,

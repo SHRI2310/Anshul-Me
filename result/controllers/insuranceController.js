@@ -34,28 +34,7 @@ console.log("running???");
     email,
   }
 
-  const fields = ["fName", "lName", "dateOfBirth", "mobile", "email"]
-
-  for (let field of fields) {
-    if (!data[field]) {
-      return next(new Error(`Please provide ${field} field`, 400));
-    }
-  }
-
-
-  if (!fName.match(/^[a-zA-Z]{2,20}$/)) {
-    return next(new Error(`First Name only contain letters`, 400));
-  }
-  if (!lName.match(/^[a-zA-Z]{2,20}$/)) {
-    return next(new Error(`First Name only contain letters`, 400));
-  }
-  if (!isPhone(mobile)) {
-    return next(new Error(`Please provide Indian valid number`, 400));
-  }
-  if (!isEmail(email)) {
-    return next(new Error(`Email is not valid`, 400));
-  }
-
+  
   const isMobileUnique = await User.findOne({ mobile });
   if (isMobileUnique) {
     return next(new Error(`This mobile is already registered`, 400));
@@ -79,22 +58,7 @@ console.log("running???");
     userId: user._id
   }
 
-  const quotefield = ["salesChannelCode",
-    "carrierCode",
-    "insurerName",
-    "frequency",
-    "premium",
-    "ppt",
-    "term",
-    "payOutFrequency"]
-
-  for (let field of quotefield) {
-    if (!data[field]) {
-      await User.findByIdAndDelete(user._id)
-      return next(new Error(`Please provide ${field} field`, 400));
-    }
-  }
-
+ 
   createQuote = await Quote.create(createQuote)
 
   const expectedData = await Quote.findOne({ email }).populate("userId")
@@ -267,7 +231,7 @@ export let finalQuote = async (req, res) => {
 
     let axios2 = await axios.post(url, bodyData, config)
     const  saveData =  await fQuoteData.create(axios2.data.PolicyObject)
-    console.log(saveData)
+    // console.log(saveData)
     if(saveData) console.log( "data saved")
     return res.status(200).send(axios2.data)
   } catch (error) {

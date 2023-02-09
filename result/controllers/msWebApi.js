@@ -74,19 +74,23 @@ const getAgent = await Agent.findById(id)
 // console.log(getAgent.data)
 
     //  const getAgent = await test. 
-
+    // ${getAgent.data.firstName}  ${getAgent.data.lastName}
+   let x= getAgent.data.panNo
+   console.log( x)
+//    console.log( )
+   console.log( getAgent.data.aadharNo)
+    // getAgent.data.aadharNo
         // const data =req.body
         const xyz ="helllo"
-        // console.log(getAgent.data.aadharNo);
-        res.render("index",{
+        const obj ={
             CandidateName:`${getAgent.data.firstName}  ${getAgent.data.lastName}`,
-            panNo: getAgent.data.panNo,
-            aadharNo :getAgent.data.aadharNo
-        })
+            panNo:`${x}`,
+            aadharNo :`${getAgent.data.aadharNo}`
+        }
+         console.log(obj);
+        // console.log(getAgent.data.aadharNo);
+      return  res.render("index.hbs",obj)
     
-
-    
-     
 
 })
 
@@ -126,7 +130,6 @@ export  const getCustomerProfile  = tryCatch(async(req,res,next)=>{
  
 
 
- 
  
 
 })

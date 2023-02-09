@@ -6,7 +6,6 @@ panCard:{
    
         type:String,
         required:true,
-   
 },
 adharCard:{
     type:String,

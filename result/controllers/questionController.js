@@ -11,10 +11,12 @@ import Error from "../utils/error.js"
 export const  uploadQue = tryCatch(async (req,res,next)=>{
 
         let data = req.body;
-        let  {question,A,B,C,D,Answer}=data;
+        let  {question,options,Answer}=data;
         
+        let addQues =await Mcq.create(data);
+         res.send(addQues)
     
-        let nArr=["question","A","B","C","D","Answer"];
+        let nArr=["question","options","Answer"];
         for( let field of nArr){
             if(!data[field]){
                 return res.status(400).json({status:false,message:`${field} is mandatory`})
@@ -25,22 +27,22 @@ export const  uploadQue = tryCatch(async (req,res,next)=>{
         }; 
     
         
-        if (!isAnswer(Answer)) {
-            return res
-              .status(400)
-              .json({ status: false, message: "Enter valid answer as per Enum" });
-          }
+    //     if (!isAnswer(Answer)) {
+    //         return res
+    //           .status(400)
+    //           .json({ status: false, message: "Enter valid answer as per Enum" });
+    //       }
       
-        let checkQueCount = await Mcq.find().count()
-        //  console.log(checkQueCount,checkQueCount<4)
+    //     let checkQueCount = await Mcq.find().count()
+    //     //  console.log(checkQueCount,checkQueCount<4)
     
-         if(checkQueCount > 40){
-            return res.status(400).json({status:false,message:" Sorry Only 40 Questions can be added !"})
-         }
+    //      if(checkQueCount > 40){
+    //         return res.status(400).json({status:false,message:" Sorry Only 40 Questions can be added !"})
+    //      }
     
-    let addQues =await Mcq.create(data);
+    // let addQues =await Mcq.create(data);
     
-    return res.status(201).json({status:true,message:"Question Added"})
+    // return res.status(201).json({status:true,message:"Question Added"})
     
   
     })
@@ -53,9 +55,6 @@ export const  uploadQue = tryCatch(async (req,res,next)=>{
           const showAllQue = await Mcq.find().select("-_id").select("-Answer").select("-__v")
 
         
-
-
-
       
           return res.status(200).json({status:true,data:showAllQue})
            
