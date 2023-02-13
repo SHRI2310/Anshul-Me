@@ -8,7 +8,7 @@ import { isEmail, isPhone } from "../utils/validation.js"
 import mongoose from "mongoose";
 
 export const insuranceApi = tryCatch(async (req, res, next) => {
-console.log("running???");
+  console.log("running???");
   const data = req.body
   const { fName,
     lName,
@@ -34,15 +34,7 @@ console.log("running???");
     email,
   }
 
-  
-  const isMobileUnique = await User.findOne({ mobile });
-  if (isMobileUnique) {
-    return next(new Error(`This mobile is already registered`, 400));
-  }
-  const isEmailUnique = await User.findOne({ email });
-  if (isEmailUnique) {
-    return next(new Error(`This email is already registered`, 400));
-  }
+
 
   user = await User.create(user);
 
@@ -58,7 +50,7 @@ console.log("running???");
     userId: user._id
   }
 
- 
+
   createQuote = await Quote.create(createQuote)
 
   const expectedData = await Quote.findOne({ email }).populate("userId")
@@ -134,13 +126,13 @@ console.log("running???");
 
 //*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1------------------>>>>>>>>>>>>>>>>>>>>>>>>>
 
-const fQuoteSchema = new mongoose.Schema({}, { strict: false },{ timestamps: true,});
- export const fQuoteData = mongoose.model('fQuoteData', fQuoteSchema);
+const fQuoteSchema = new mongoose.Schema({}, { strict: false }, { timestamps: true, });
+export const fQuoteData = mongoose.model('fQuoteData', fQuoteSchema);
 
 export let finalQuote = async (req, res) => {
   try {
     let body = req.body
-    console.log("hello i am running")
+    // console.log("hello i am running")
     // const data = req.body
     const {
       EffectiveDate,
@@ -158,7 +150,7 @@ export let finalQuote = async (req, res) => {
       TouchPoint,
       AgentCode,
       QniProduct,
-      PayOutFrequency,
+      PayoutFrequency,
       PolicyLobList: [
         {
           PolicyRiskList: [
@@ -177,7 +169,7 @@ export let finalQuote = async (req, res) => {
       },
       { headers: { "Content-Type": "application/json" } },
     )
-    // console.log(axios1.data);
+    console.log(axios1.data);
 
 
     let url = "https://sandbox-in-gw.insuremo.com/riabroker/1.0/broker-bff-app/v1/finalQuote";
@@ -197,7 +189,7 @@ export let finalQuote = async (req, res) => {
       "TouchPoint": TouchPoint,
       "AgentCode": AgentCode,
       "QniProduct": QniProduct,
-      "PayoutFrequency": PayOutFrequency,
+      "PayoutFrequency": PayoutFrequency,
       "PolicyLobList": [
         {
           "PolicyRiskList": [
@@ -230,9 +222,9 @@ export let finalQuote = async (req, res) => {
     // console.log(config.Authorization,config["Content-Length"], ".............>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
     let axios2 = await axios.post(url, bodyData, config)
-    const  saveData =  await fQuoteData.create(axios2.data.PolicyObject)
-    // console.log(saveData)
-    if(saveData) console.log( "data saved")
+    const saveData = await fQuoteData.create(axios2.data.PolicyObject)
+    // console.log(bodyData)
+    if (saveData) console.log("data saved")
     return res.status(200).send(axios2.data)
   } catch (error) {
     console.log(error);
@@ -320,8 +312,8 @@ export const filterApi = tryCatch(async (req, res, next) => {
               "Accept-Encoding": "gzip,deflate,br",
               "Connection": "keep-alive",
               "Authorization": `Bearer ${response?.data?.access_token}`,
-      
-      
+
+
             }
           }
         )
