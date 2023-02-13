@@ -169,7 +169,7 @@ export let finalQuote = async (req, res) => {
       },
       { headers: { "Content-Type": "application/json" } },
     )
-    console.log(axios1.data);
+    // console.log(axios1.data);
 
 
     let url = "https://sandbox-in-gw.insuremo.com/riabroker/1.0/broker-bff-app/v1/finalQuote";

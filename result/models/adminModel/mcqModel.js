@@ -2,17 +2,14 @@ import mongoose from "mongoose";
  import { mcqAnswerEnum } from "../../common/static.js"
 // autoIncrement.initialize(connection);
 const mcqSchema = new mongoose.Schema({
-  id:{
-    type:String,
+
+  Question: {
+    type: String,
+    required: true,
     unique:true
   },
-  question: {
-    type: String,
-    trim: true,
-    required: true,
-  },
   Answers:[String],
-  correctAnswer:{
+  CorrectAnswer:{
     type:Number,
     enum:[0,1,2,3]
   }
