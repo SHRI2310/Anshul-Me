@@ -3,13 +3,13 @@ import mongoose from "mongoose";
 // autoIncrement.initialize(connection);
 const mcqSchema = new mongoose.Schema({
 
-  Question: {
+  question: {
     type: String,
     required: true,
     unique:true
   },
-  Answers:[String],
-  CorrectAnswer:{
+  answers:[String],
+  correctAnswer:{
     type:Number,
     enum:[0,1,2,3]
   }
