@@ -9,9 +9,14 @@ import Error from "../utils/error.js"
 
 
 export const  uploadQue = tryCatch(async (req,res,next)=>{
-
-        let data = req.body;
-        
+   let data= req.body;
+   
+if(data.length < 4){
+   return next(new Error("provide all questions ", 400))
+}
+   let addQues =await Mcq.create(data);
+ 
+      return   res.send(addQues)
         
         
     
@@ -24,11 +29,9 @@ export const  uploadQue = tryCatch(async (req,res,next)=>{
         //  console.log(checkQueCount,checkQueCount<4)
     
          // if(checkQueCount > 40){
-            
+
          //    return res.status(400).json({status:false,message:" Sorry Only 40 Questions can be added !"})
          // }
-         let addQues =await Mcq.create(data);
-         res.send(addQues)
     
     
     
