@@ -53,6 +53,16 @@ export const showAllques = tryCatch(async (req, res) => {
 
 })
 
+export const showTest = tryCatch(async (req, res) => {
+
+
+   const allque = await Mcq.find().select("-_id").select("-CorrectAnswer").select("-__v");
+
+   return res.status(200).json({ status: true, data: allque });
+
+
+})
+
 export const delQue = tryCatch(async (req, res, next) => {
 
    let { uid } = req.body;
