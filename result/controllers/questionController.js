@@ -11,9 +11,9 @@ import Error from "../utils/error.js"
 export const  uploadQue = tryCatch(async (req,res,next)=>{
    let data= req.body;
    
-if(data.length < 4){
-   return next(new Error("provide all questions ", 400))
-}
+// if(data.length < 4){
+//    return next(new Error("provide all questions ", 400))
+// }
    let addQues =await Mcq.create(data);
  
       return   res.send(addQues)
@@ -45,13 +45,23 @@ if(data.length < 4){
     export  const showAllques = tryCatch(async(req,res)=>{
      
        
-          const showAllQue = await Mcq.find().select("-_id").select("-CorrectAnswer").select("-__v");
+          const showAllQue = await Mcq.find().select("-_id").select("-__v");
 
           return res.status(200).json({status:true,data:showAllQue});
            
      
       })
 
+      export const delQue =tryCatch(async(req,res,next)=>{
+
+         let{uid}= req.body;
+
+         let del = await Mcq.findOneAndDelete({uid:uid});
+         // console.log(del)
+         if(del === null) return next(new Error("there is no such question with this UID", 400))
+
+         return res.send("Ques deleted")
+      })
 
 
     
