@@ -1,3 +1,14 @@
+let front =[
+{"uid": "a","CorrectAnswer": "1"},
+{"uid": "b","CorrectAnswer": "4"},
+{"uid": "c","CorrectAnswer": "3"}, 
+{"uid": "d","CorrectAnswer": "2"}, 
+{"uid": "e","CorrectAnswer": "4"}, 
+{"uid": "u","CorrectAnswer": "4"},
+{"uid": "g","CorrectAnswer": "4"},
+{"uid": "h","CorrectAnswer": "2"},
+{"uid": "m","CorrectAnswer": "3"}
+]
  let db =[
 {"uid": "a","Question": " check 1 ?","Answers": ["a", "B", "c", "d"],"CorrectAnswer": "2"},
 {"uid": "b","Question": " check 2 ?","Answers": ["a", "B", "c", "d"],"CorrectAnswer": "4"},
@@ -10,19 +21,28 @@
 {"uid": "m","Question": " check 9 ?","Answers": ["a", "B", "c", "d"],"CorrectAnswer": "1"}
 ]
 
-let front =[
-{"uid": "a","CorrectAnswer": "2"},
-{"uid": "b","CorrectAnswer": "4"},
-{"uid": "c", "CorrectAnswer": "3" }, 
-{"uid": "d","CorrectAnswer": "2" }, 
-{"uid": "e", "CorrectAnswer": "4"}, 
-{"uid": "u",  "CorrectAnswer": "4"},
-{"uid": "g","CorrectAnswer": "4"},
-{ "uid": "h",  "CorrectAnswer": "2"},
-{"uid": "m", "CorrectAnswer": "1"}
-]
 
-
+function compareArrays(arr1, arr2) {
+    const hashTable= {};
+    let count = 0;
+    // Store key-value pairs of arr1 in hash table
+    for (let i = 0; i < arr1.length; i++) {
+        const { uid, CorrectAnswer } = arr1[i];
+      hashTable[uid] = CorrectAnswer;
+    }
+    
+    // Check if each key-value pair in arr2 exists in hash table
+    for (let i = 0; i < arr2.length; i++) {
+        const { uid, CorrectAnswer } = arr2[i];
+        if (hashTable[uid] === CorrectAnswer) {
+            count++;
+        }
+    }
+    console.log(hashTable)
+ 
+    return count;
+  }
+console.log(compareArrays(front,db))
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // export const getCustomerProfile = tryCatch(async (req,res,next)=>{

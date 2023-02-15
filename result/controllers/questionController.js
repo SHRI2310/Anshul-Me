@@ -107,15 +107,32 @@ export const ansCheck = tryCatch(async (req, res,next) => {
    // console.log(check);
    let marks = 0
    let passingMarks =5
-   let c =0
-   for( let i of test){
-    for( let j of check){
-        if(i.uid==j.uid && i.CorrectAnswer == j.CorrectAnswer){
-            marks++
-        }
-    }
-   }
+
+   // for( let i of test){
+   //  for( let j of check){
+   //      if(i.uid==j.uid && i.CorrectAnswer == j.CorrectAnswer){
+   //          marks++
+   //      }
+   //  }
+   // }
    // console.log(c);
+
+   const map = {};
+   for (let i = 0; i < test.length; i++) {
+     const { uid,CorrectAnswer } = test[i];
+     map[uid] = CorrectAnswer;
+   }
+ 
+
+   for (let i = 0; i < check.length; i++) {
+     const { uid,CorrectAnswer }= check[i];
+   //   console.log(x[i],"--->>",CorrectAnswer)
+   // console.log(uid,CorrectAnswer)
+     if (  map[uid]== CorrectAnswer) {
+       marks++;
+     }
+   }
+// console.log(map)
    let flag ;
 if(marks >= passingMarks) 
 {
