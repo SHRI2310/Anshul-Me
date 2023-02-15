@@ -11,6 +11,7 @@ import e from "express"
 
 export const uploadQue = tryCatch(async (req, res, next) => {
    let data = req.body;
+   if (!data.length) return next(new Error("request body is empty ", 400))
 
    // if(data.length < 4){
    //    return next(new Error("provide all questions ", 400))
@@ -66,6 +67,7 @@ export const showTest = tryCatch(async (req, res) => {
 export const delQue = tryCatch(async (req, res, next) => {
 
    let { uid } = req.body;
+   if (!req.body.length) return next(new Error("request body is empty ", 400))
 
    let del = await Mcq.findOneAndDelete({ uid: uid });
    // console.log(del)
@@ -78,11 +80,12 @@ export const delQue = tryCatch(async (req, res, next) => {
 export const editQue = tryCatch(async (req, res, next) => {
    let param = req.params.uid;
    let data = req.body;
+   if (!data.length) return next(new Error("request body is empty ", 400))
 
 
    let edit = await Mcq.findOneAndUpdate({ uid: param }, data, { new: true });
    // console.log(edit);
-   if (edit=== null) return next(new Error("there is no such question with this UID", 400))
+   if (edit === null) return next(new Error("there is no such question with this UID", 400))
 
    // console.log(del)
    // if(del === null) return next(new Error("there is no such question with this UID", 400))
@@ -93,19 +96,41 @@ export const editQue = tryCatch(async (req, res, next) => {
 
 
 
-export const ansCheck = tryCatch(async (req, res) => {
+export const ansCheck = tryCatch(async (req, res,next) => {
+  
 
-   // const ans = await Mcq.find()
-   // const mcqAnswerEnum = ["A","B","C","D"];
-   // let x=`${clickedAns}`
-   // let marks =0
-   // for ( let i =0 ; i <=ans.length;i++){
+   let test =req.body;
+   if (!test.length) return next(new Error("request body is empty ", 400))
 
-   //     if(ans[i][Answer]== x  )  marks++
-   // }
+   let check = await Mcq.find()
+   // console.log(test);
+   // console.log(check);
+   let marks = 0
+   let passingMarks =5
+   let c =0
+   for( let i of test){
+    for( let j of check){
+        if(i.uid==j.uid && i.CorrectAnswer == j.CorrectAnswer){
+            marks++
+        }
+    }
+   }
+   // console.log(c);
+   let flag ;
+if(marks >= passingMarks) 
+{
+   flag ="PASSED"
+  return res.json({marks:marks,message:`CONGRATULATIONS YOU ARE ${flag} ...!!!🤩🤩`})
 
-   return res.status(200).json({ status: true, data: showAllQue })
+}
+if(marks < passingMarks) 
+{
+   flag ="FAILED"
+  return res.json({marks:marks,message:`HARD LUCK SORRY....!!!!😔😔 You Are Failed ${flag} `})
 
+}
+   // console.log(count);
+   
 
 })
 

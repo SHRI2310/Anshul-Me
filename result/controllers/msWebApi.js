@@ -3,7 +3,7 @@ import tryCatch from "../middleware/tryCatch.js";
 import Error from "../utils/error.js"
 import axios from "axios";
 import { Agent} from "../models/agentData.js";
-import mongoose from "mongoose";
+import { Customer } from "../models/adminModel/customer.js";
 // export const test =mongoose.model("test",{})
 
 
@@ -125,8 +125,8 @@ export  const getCustomerProfile  = tryCatch(async(req,res,next)=>{
            // console.log(data)
            const sendData = await axios.get(url1,{params:params})
            // console.log(sendData.data)
-           
-           res.send(sendData.data)
+           await Customer.create(sendData.data.data)
+          return  res.send(sendData.data)
  
 
 

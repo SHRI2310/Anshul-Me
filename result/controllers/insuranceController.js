@@ -3,13 +3,15 @@ import { User } from "../models/user.js";
 import tryCatch from "../middleware/tryCatch.js";
 import Error from "../utils/error.js"
 import axios from "axios";
-import { isEmail, isPhone } from "../utils/validation.js"
+import { isEmail, isPhone } from "../utils/validation.js";
+import { Customer } from "../models/adminModel/customer.js";
 
 import mongoose from "mongoose";
 
 export const insuranceApi = tryCatch(async (req, res, next) => {
-  console.log("running???");
+  
   const data = req.body
+
   const { fName,
     lName,
     dateOfBirth,
@@ -126,7 +128,7 @@ export const insuranceApi = tryCatch(async (req, res, next) => {
 
 //*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1------------------>>>>>>>>>>>>>>>>>>>>>>>>>
 
-const fQuoteSchema = new mongoose.Schema({}, { strict: false }, { timestamps: true, });
+const fQuoteSchema = new mongoose.Schema({}, { strict: false }, { timestamps: true });
 export const fQuoteData = mongoose.model('fQuoteData', fQuoteSchema);
 
 export let finalQuote = async (req, res) => {
