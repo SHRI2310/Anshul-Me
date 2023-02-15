@@ -102,7 +102,7 @@ export const ansCheck = tryCatch(async (req, res,next) => {
    let test =req.body;
    if (!test.length) return next(new Error("request body is empty ", 400))
 
-   let check = await Mcq.find()
+   let check = await Mcq.find().sort({uid:1})
    // console.log(test);
    // console.log(check);
    let marks = 0
