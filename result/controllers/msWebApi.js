@@ -36,7 +36,7 @@ export  const getAgentProfile  = tryCatch(async(req,res,next)=>{
     let params ={}
     if(token) params.token =token;
     if(pospId) params.pospId =pospId;
-  
+  console.log(cookieToken, "ct<-->tt",token)
      if(cookieToken != params.token){
         // console.log(cookieToken, token,"tpoken");
             return next(new Error(" you are Not authorised Token or POSPID is invalid", 400))
@@ -54,10 +54,10 @@ export  const getAgentProfile  = tryCatch(async(req,res,next)=>{
           
             // console.log(data)
             const sendData = await axios.get(url1,{params:params})
-            // console.log(sendData.data)
+            console.log(sendData)
             const saveData =await Agent.create(sendData.data)
             // console.log(saveData)
-            res.status(200).cookie("id",saveData._id).send({data:sendData.data,id:saveData._id})
+          return   res.status(200).cookie("id",saveData._id).send({data:sendData.data,id:saveData._id})
   
 })
 
@@ -67,6 +67,7 @@ export  const getAgentProfile  = tryCatch(async(req,res,next)=>{
 
 
 export const generateCertificate = tryCatch(async(req,res,next)=>{
+    console.log("running")
 const {id} =req.cookies;
 // console.log(id);
 
@@ -75,17 +76,17 @@ const getAgent = await Agent.findById(id)
 
     //  const getAgent = await test. 
     // ${getAgent.data.firstName}  ${getAgent.data.lastName}
-   let x= getAgent.data.panNo
+   let x= getAgent?.data?.panNo
    console.log( x)
 //    console.log( )
-   console.log( getAgent.data.aadharNo)
+   console.log( getAgent?.data?.aadharNo)
     // getAgent.data.aadharNo
         // const data =req.body
         const xyz ="helllo"
         const obj ={
-            CandidateName:`${getAgent.data.firstName}  ${getAgent.data.lastName}`,
+            CandidateName:`${getAgent?.data?.firstName}  ${getAgent?.data?.lastName}`,
             panNo:`${x}`,
-            aadharNo :`${getAgent.data.aadharNo}`
+            aadharNo :`${getAgent?.data?.aadharNo}`
         }
          console.log(obj);
         // console.log(getAgent.data.aadharNo);
@@ -124,7 +125,7 @@ export  const getCustomerProfile  = tryCatch(async(req,res,next)=>{
          
            // console.log(data)
            const sendData = await axios.get(url1,{params:params})
-           // console.log(sendData.data)
+           console.log(sendData)
            await Customer.create(sendData.data.data)
           return  res.send(sendData.data)
  
@@ -133,3 +134,5 @@ export  const getCustomerProfile  = tryCatch(async(req,res,next)=>{
  
 
 })
+
+

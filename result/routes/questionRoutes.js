@@ -1,6 +1,6 @@
 import express from "express"
 import {  showTest,editQue,delQue, showAllques,uploadQue, ansCheck} from "../controllers/questionController.js"
-
+import { isAuthenticated } from "../middleware/auth.js"
 const router = express.Router()
 
 
