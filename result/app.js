@@ -30,9 +30,8 @@ const StaticPath = path.join(__dirname,"./public")
 // console.log(StaticPath)
 
 app.use(cors({
-    origin: 'https://online.riainsurance.com',
+    "origin": '*',
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE"
-   
 }));
 app.use(cookieParser())
 app.use(express.json())
