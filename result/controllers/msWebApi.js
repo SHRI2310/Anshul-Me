@@ -4,7 +4,7 @@ import Error from "../utils/error.js"
 import axios from "axios";
 import { Agent } from "../models/agentData.js";
 import { Customer } from "../models/adminModel/customer.js";
-import { JSONCookie } from "cookie-parser";
+
 // export const test =mongoose.model("test",{})
 
 
@@ -25,11 +25,7 @@ expiresIn: new Date(Date.now()*2500000000000000000000000*10000)
 
     res.status(200).cookie("cookieToken", token,options).send({ token: token, message: "token Saved" })
 
-
-
-
 })
-
 
 
 export const getAgentProfile = tryCatch(async (req, res, next) => {
@@ -68,7 +64,7 @@ export const getAgentProfile = tryCatch(async (req, res, next) => {
     console.log(saveData._id, "from here")
     let c =JSON.parse(JSON.stringify(saveData._id))
 
-    return res.status(200).cookie("id",c , options).send({ data: sendData.data, id: saveData._id })
+    return res.status(200).cookie("cookieId",c , options).send({ data: sendData.data, id: saveData._id })
 
 })
 
@@ -78,11 +74,11 @@ export const getAgentProfile = tryCatch(async (req, res, next) => {
 
 
 export const generateCertificate = tryCatch(async (req, res, next) => {
-    console.log("running")
-    const { id } = req.cookies;
-    console.log(id,"hhhhhhhhhhhhhhh");
+    console.log(req)
+    const { cookieId } = req.cookies;
+    console.log(cookieId,"hhhhhhhhhhhhhhh");
 
-    const getAgent = await Agent.findById( id )
+    const getAgent = await Agent.findById( cookieId )
     console.log(getAgent.data)
 
     //  const getAgent = await test. 
@@ -105,7 +101,6 @@ export const generateCertificate = tryCatch(async (req, res, next) => {
 
 
 })
-
 
 export const getCustomerProfile = tryCatch(async (req, res, next) => {
 
@@ -143,40 +138,36 @@ export const getCustomerProfile = tryCatch(async (req, res, next) => {
 
 })
 
-// export const newApi =tryCatch(async(req,res,next)=>{
-//     let url = "https://ambrelamoney.coherentlab.com/api/ambrela-auth",
-//     data = {
-//         userName: "MSWebRia",
-//         password: "M12sRia#1000"
-//     }
-// const fetchData = await axios.post(url, data);
-// //    console.log(fetchData.data.data.securityCode)
+export const preFill =tryCatch(async(req,res,next)=>{
 
-// let token = fetchData.data.data.securityCode
+    let { cookieToken } = req.cookies
+    let { token, customerId ,posId} = req.query;
+    let params = {}
+    if (token) params.token = token;
+    if (customerId) params.customerId = customerId;
+    if (posId) params.posId = posId;
 
 
-// let { queryToken, pospId } = req.query;
-// let params = {}
-// if (token) params.token = token;
-// if (pospId) params.pospId = pospId;
-// console.log(token, "ct<-->tt", queryToken)
-// if (cookieToken != params.queryToken) {
-//     // console.log(cookieToken, token,"tpoken");
-//     return next(new Error(" you are Not authorised Token or POSPID is invalid", 400))
-// }
-// let pospId1 = "RIA205000002"
+    if (cookieToken != params.token) {
+        // console.log(cookieToken, token,"tpoken");
+        return next(new Error(" you are Not authorised Token or customerId is invalid", 400))
+    }
+    let customerId1 = "AC2301000024"
 
-// if (pospId1 != params.pospId) {
-//     // console.log(pospId1 != pospId, "posp");
-//     return next(new Error(" you are Not authorised Token or POSPID is invalid", 400))
-// }
+    if (customerId1 != params.customerId) {
+        // console.log(pospId1 != pospId, "posp");
+        return next(new Error(" you are Not authorised Token or customerId is invalid", 400))
+    }
 
 
-// let url1 = "https://ambrelamoney.coherentlab.com/api/getAgentProfile"
+    let url1 = "https://ambrelamoney.coherentlab.com/api/getCustomerProfile"
 
 
-// // console.log(data)
-// const sendData = await axios.get(url1, { params: params })
-// // console.log(sendData)
-// const saveData = await Agent.create(sendData.data)
-// })
+    // console.log(data)
+    const sendData = await axios.get(url1, { params: params })
+    // console.log(sendData)
+    return res.send(sendData.data)
+
+
+    
+   })

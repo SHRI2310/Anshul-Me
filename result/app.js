@@ -30,8 +30,9 @@ const StaticPath = path.join(__dirname,"./public")
 // console.log(StaticPath)
 
 app.use(cors({
-    "origin": '*',
-    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE"
+    "origin": 'http://localhost:3000/',
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "credentials":true
 }));
 app.use(cookieParser())
 app.use(express.json())
