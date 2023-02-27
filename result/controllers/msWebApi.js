@@ -164,7 +164,7 @@ export const preFill =tryCatch(async(req,res,next)=>{
 
 
     // console.log(data)
-    const sendData = await axios.get(url1, { params: params })
+    const sendData = await axios.get(url1,{params})
     // console.log(sendData)
     return res.send(sendData.data)
 

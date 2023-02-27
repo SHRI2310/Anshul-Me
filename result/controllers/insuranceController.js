@@ -12,7 +12,8 @@ export const insuranceApi = tryCatch(async (req, res, next) => {
   
   const data = req.body
 
-  const { fName,
+  const { 
+    fName,
     lName,
     dateOfBirth,
     mobile,
@@ -35,8 +36,6 @@ export const insuranceApi = tryCatch(async (req, res, next) => {
     mobile,
     email,
   }
-
-
 
   user = await User.create(user);
 

@@ -7,6 +7,6 @@ const router = express.Router()
  router.get("/api/getAgentProfile",getAgentProfile)
  router.get("/api/getCustomerProfile",getCustomerProfile)
 router.get("/certificate",generateCertificate)
-router.get("/api/customerByPosId",preFill)
+router.get("/api/preFill",preFill)
 
  export default  router
