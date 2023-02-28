@@ -8,6 +8,7 @@ router.post("/register",register)
 router.post("/login",login)
 router.get("/logout",isAuthenticated,logout)
 
+
 // router.route("/delete").delete(deleteAll)
 
 
