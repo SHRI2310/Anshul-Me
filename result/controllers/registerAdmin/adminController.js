@@ -65,7 +65,7 @@ export const login = tryCatch(async (req,res,next)=>{
         expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
     }
 
-    return res.status(200).cookie("adminToken", token, options).json({ status: true, message:"Admin Login Seccessfully"})
+    return res.status(200).cookie("adminToken", token, options).json({ status: true,token:token, message:"Admin Login Seccessfully"})
 
 
 })
@@ -73,6 +73,8 @@ export const login = tryCatch(async (req,res,next)=>{
 
 export const logout = tryCatch(async (req, res,next) => {
     
+    
+
        return res.status(200).cookie("adminToken", null, { expires: new Date(Date.now()) })
             .json({ success: true, message: "User Logedout" })
   
