@@ -13,9 +13,9 @@ export const uploadQue = tryCatch(async (req, res, next) => {
    let data = req.body;
    if (!data.length) return next(new Error("request body is empty ", 400))
 
-   // if(data.length < 4){
-   //    return next(new Error("provide all questions ", 400))
-   // }
+   if(data.length < 40){
+      return next(new Error("provide all questions ", 400))
+   }
    let addQues = await Mcq.create(data);
 
    return res.send(addQues)

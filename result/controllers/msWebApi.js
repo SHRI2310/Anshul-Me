@@ -9,12 +9,12 @@ import { Customer } from "../models/adminModel/customer.js";
 
 
 export const fetchAmbrelaData = tryCatch(async (req, res, next) => {
-    let url = "https://ambrelamoney.coherentlab.com/api/ambrela-auth",
+    let url = "https://test.ambrela.money/api/ambrela-auth",
         data = {
             userName: "MSWebRia",
             password: "M12sRia#1000"
         }
-    const fetchData = await axios.post(url, data);
+    const fetchData = await axios.post(url,data);
     //    console.log(fetchData.data.data.securityCode)
 
     let token = fetchData.data.data.securityCode

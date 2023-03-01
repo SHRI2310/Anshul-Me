@@ -7,6 +7,9 @@ import { isEmail, isPhone } from "../utils/validation.js";
 import { Customer } from "../models/adminModel/customer.js";
 
 import mongoose from "mongoose";
+const leadData = new mongoose.Schema({}, { strict: false }, { timestamps: true });
+const Lead = mongoose.model('Lead', leadData);
+
 
 export const insuranceApi = tryCatch(async (req, res, next) => {
   
@@ -107,7 +110,9 @@ export const insuranceApi = tryCatch(async (req, res, next) => {
 
           }
 
-        }).then((nData) => {
+        }).then(async(nData) => {
+        
+          const createLead = await Lead.create(nData.data)
 
           return res.send(nData.data)
         }).catch(err1 => {
@@ -122,8 +127,12 @@ export const insuranceApi = tryCatch(async (req, res, next) => {
 })
 
 
+//----------------------
 
-
+export const getLeads = tryCatch(async (req, res, next) => {
+  const getLeadData = await Lead.find()
+  return res.send(getLeadData)
+})
 
 //*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1------------------>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -223,7 +232,7 @@ export let finalQuote = async (req, res) => {
     // console.log(config.Authorization,config["Content-Length"], ".............>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
     let axios2 = await axios.post(url, bodyData, config)
-    const saveData = await fQuoteData.create(axios2.data.PolicyObject)
+    const saveData = await fQuoteData.create(axios2.data)
     // console.log(bodyData)
     if (saveData) console.log("data saved")
     return res.status(200).send(axios2.data)

@@ -45,3 +45,4 @@ userId : {
 })
 
 export const Quote = mongoose.model("Quote",quoteSchema)
+
