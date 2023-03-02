@@ -112,7 +112,8 @@ export const insuranceApi = tryCatch(async (req, res, next) => {
 
         }).then(async(nData) => {
         
-          const createLead = await Lead.create(nData.data)
+          const createLead = await Lead.create(nData.data[0])
+          
 
           return res.send(nData.data)
         }).catch(err1 => {
@@ -339,6 +340,17 @@ export const filterApi = tryCatch(async (req, res, next) => {
       // console.log(err)
       return res.send(err.message);
     });
+
+
+})
+
+
+export const  dateFilter =tryCatch(async(req,res,next)=>{
+  // let data  = req.body;
+  // let {toDate,fromDate} = data;
+
+   let filter = await axios.get("https://api.online.riainsurance.com/fQuote")
+   
 
 
 })

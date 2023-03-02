@@ -1,5 +1,5 @@
 import express from "express"
-import {  finalQuote, insuranceApi ,filterApi, getLeads} from "../controllers/insuranceController.js"
+import {  finalQuote, insuranceApi ,filterApi, getLeads } from "../controllers/insuranceController.js"
 
 const router = express.Router()
 
