@@ -94,3 +94,47 @@ console.log(compareArrays(front,db))
 // let x = f()
 // let y = x()
 //  console.log(y())
+
+
+
+
+
+
+
+const Instance = axios.create({
+  baseURL: baseUrl,
+  timeout: 50000,
+});
+
+Instance.interceptors.response.use(
+  (response) => {
+    return response.data;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+Instance.interceptors.request.use(
+  (config) => {
+   
+      config.headers= {
+        "Content-Type": "application/json",
+        "Content-Length": bodyData.length,
+        // "Host":"localHost",
+        "User-Agent": "PostmanRuntime/7.30.0",
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip,deflate,br",
+        "Connection": "keep-alive",
+        "Authorization": `Bearer ${axios1?.data?.access_token}`,
+
+
+      }
+    return config
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+)
+
+export default  Instance

@@ -57,7 +57,7 @@ export const insuranceApi = tryCatch(async (req, res, next) => {
 
   createQuote = await Quote.create(createQuote)
 
-  const expectedData = await Quote.findOne({ email }).populate("userId")
+  // const expectedData = await Quote.findOne({ email }).populate("userId")
 
   let da = await axios.post("https://riabroker-gi-sandbox-in.insuremo.com/v1/json/tickets",
 
@@ -346,11 +346,9 @@ export const filterApi = tryCatch(async (req, res, next) => {
 
 
 export const  dateFilter =tryCatch(async(req,res,next)=>{
-  // let data  = req.body;
-  // let {toDate,fromDate} = data;
-
-   let filter = await axios.get("https://api.online.riainsurance.com/fQuote")
-   
-
-
+  let data  = req.body;
+  let {fromDate,toDate} = data;
+ let filter =await Lead.find({$and: [{QuotationDate: {$gte: fromDate}},{QuotationDate: {$lte: toDate}}]})
+ if(filter.length==0)  return next(new Error(" No data found with this  filter", 400))
+return res.send(filter)
 })

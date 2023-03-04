@@ -115,11 +115,11 @@ export const getCustomerProfile = tryCatch(async (req, res, next) => {
         // console.log(cookieToken, token,"tpoken");
         return next(new Error(" you are Not authorised Token or customerId is invalid", 400))
     }
-    let customerId1 = "AC2301000024"
+    // let customerId1 = "AC2301000024"
 
-    if (customerId1 != params.customerId) {
+    if (!customerId) {
         // console.log(pospId1 != pospId, "posp");
-        return next(new Error(" you are Not authorised Token or customerId is invalid", 400))
+        return next(new Error(" you are Not authorised  customerId is invalid", 400))
     }
 
 
@@ -140,7 +140,9 @@ export const preFill = tryCatch(async (req, res, next) => {
         password: "M12sRia#1000"
     }
     let da = await axios.post("https://test.ambrela.money/api/ambrela-auth", data,
-        { headers: { "Content-Type": "application/json" } }
+        { headers: { "Content-Type": "application/json",
+       
+    } }
     )
  
 // console.log(da?.data,"token");
@@ -155,9 +157,9 @@ export const preFill = tryCatch(async (req, res, next) => {
     if (customerId) params.customerId = customerId;
     if (posId) params.posId = posId;
 
-    let customerId1 = "AC2301000024"
+    // let customerId1 = "AC2301000024"
 
-    if (customerId1 != params.customerId) {
+    if ( !customerId) {
         // console.log(pospId1 != pospId, "posp");
         return next(new Error(" you are Not authorised customerId is invalid", 400))
     }
@@ -165,7 +167,7 @@ export const preFill = tryCatch(async (req, res, next) => {
 
     let url1 = `https://test.ambrela.money/api/getCustomerProfile?token=${token}`
 
-    const sendData = await axios.get(url1, { params })
+    const sendData = await axios.get(url1, { params },{headers:{ "Access-Control-Allow-Credentials": true}})
 
     // console.log(sendData);
     return res.send(sendData.data)
