@@ -10,17 +10,13 @@ import {config} from "dotenv"
 import { connectDatabase } from "./config/database.js"
 import mongoose from "mongoose";
 import cors from "cors"
-
+import excelRoute from "./routes/excelRoute.js"
 export const app= express()
-import {
-    dirname
-  } from 'path';
-  import {
-    fileURLToPath
-  } from 'url';
+import { dirname} from 'path';
+import { fileURLToPath} from 'url';
   import path from "path";
-  const __dirname = dirname(fileURLToPath(
-    import.meta.url));
+import multer from "multer";
+  const __dirname = dirname(fileURLToPath(import.meta.url));
 
 
 
@@ -37,13 +33,14 @@ app.use(cors({
 app.use(cookieParser())
 app.use(express.json())
 app.set("view engine","hbs")
-// app.use(express.static(StaticPath))
+// app.use(express.static(path.resolve(__dirname,"./public")))
 app.use("/",route)
 app.use("/",msWebApi)
 app.use("/",status)
 app.use("/",adminRoute)
 app.use("/",questionRoutes)
 app.use(errorHandler)
+app.use("/",excelRoute)
 
 config({path:"./config/config.env"})
 mongoose.set("strictQuery",true)

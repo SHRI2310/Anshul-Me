@@ -102,8 +102,8 @@ console.log(compareArrays(front,db))
 
 
 const Instance = axios.create({
-  baseURL: baseUrl,
-  timeout: 50000,
+
+  timeout: 5000,
 });
 
 Instance.interceptors.response.use(

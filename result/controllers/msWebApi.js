@@ -36,17 +36,17 @@ export const getAgentProfile = tryCatch(async (req, res, next) => {
     let params = {}
     if (token) params.token = token;
     if (pospId) params.pospId = pospId;
-    console.log(cookieToken, "ct<-->tt", token)
+    // console.log(cookieToken, "ct<-->tt", token)
     if (cookieToken != params.token) {
         // console.log(cookieToken, token,"tpoken");
         return next(new Error(" you are Not authorised Token  is invalid", 400))
     }
-    let pospId1 = "RIA205000002"
+    // let pospId1 = "RIA205000002"
 
-    if (pospId1 != params.pospId) {
-        // console.log(pospId1 != pospId, "posp");
-        return next(new Error(" you are Not authorised Token or POSPID is invalid", 400))
-    }
+    // if (pospId1 != params.pospId) {
+    //     // console.log(pospId1 != pospId, "posp");
+    //     return next(new Error(" you are Not authorised Token or POSPID is invalid", 400))
+    // }
 
 
     let url1 = "https://test.ambrela.money/api/getAgentProfile"
@@ -55,7 +55,20 @@ export const getAgentProfile = tryCatch(async (req, res, next) => {
     // console.log(data)
     const sendData = await axios.get(url1, { params: params })
     // console.log(sendData)
-    const saveData = await Agent.create(sendData.data)
+     
+    let checkPospId = await Agent.findOne({"data.pospId":pospId})
+    // console.log(checkPospId);
+
+     if(checkPospId){
+        return next(new Error(" We Already have Agent With the given pospId", 400))
+     }
+    // console.log(sendData.data.status);
+     if(sendData.data.status == false){
+         return next(new Error(" please provide Valid pospId", 400))
+        }
+            const saveData = await Agent.create(sendData.data)
+            
+     
     let options = {
 
         // secure: true,
@@ -175,3 +188,10 @@ export const preFill = tryCatch(async (req, res, next) => {
 
 
 })
+
+
+// --------------->>>>>> get All agents'--------------<><><><><><>><
+ export const getAllAgents = tryCatch(async(req,res,next)=>{
+     let showAllAgents = await Agent.find()
+     return res.send({count:showAllAgents.length,allagents:showAllAgents})
+ })

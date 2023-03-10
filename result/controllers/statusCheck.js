@@ -59,8 +59,6 @@ let {QuotationNo}= req.body;
     let {bearer} =req.cookies
   let {QuotationNo}= req.body;
  
-
- 
   let findQuote  = await fQuoteData.findOne({QuotationNo})
  //    let x =await findQuote
  //  console.log(findQuote)

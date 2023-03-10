@@ -5,6 +5,8 @@ import { Mcq } from "../models/adminModel/mcqModel.js"
 import { isAnswer } from "../utils/validation.js"
 import tryCatch from "../middleware/tryCatch.js"
 import Error from "../utils/error.js"
+import axios from "axios"
+
 
 
 
@@ -57,7 +59,7 @@ export const showAllques = tryCatch(async (req, res) => {
 export const showTest = tryCatch(async (req, res) => {
 
 
-   const allque = await Mcq.find().select("-_id").select("-CorrectAnswer").select("-__v");
+   const allque = await Mcq.find().select("-_id").select("-correctAnswer").select("-__v");
 
    return res.status(200).json({ status: true, data: allque });
 
@@ -98,6 +100,7 @@ export const editQue = tryCatch(async (req, res, next) => {
 
 export const ansCheck = tryCatch(async (req, res,next) => {
   
+let {cookieId,cookieToken}= req.cookies;
 
    let test =req.body;
    if (!test.length) return next(new Error("request body is empty ", 400))
@@ -116,7 +119,7 @@ export const ansCheck = tryCatch(async (req, res,next) => {
    for (let i = 0; i < check.length; i++) {
      const { uid,correctAnswer }= check[i];
    //   console.log(x[i],"--->>",CorrectAnswer)
-   console.log(uid,correctAnswer)
+   // console.log(uid,correctAnswer)
      if (  map[uid]== correctAnswer) {
        marks++;
      }
@@ -125,13 +128,24 @@ export const ansCheck = tryCatch(async (req, res,next) => {
    let flag ;
 if(marks >= passingMarks) 
 {
-   flag ="PASSED"
-  return res.json({marks:marks,message:`CONGRATULATIONS YOU ARE ${flag} ...!!!🤩🤩`})
+console.log("hereeeeeeeeeeee");
+   flag ="PASSED";
+let Update_Education_Status = await axios.post(`https://test.ambrela.money/api/updateEducationStatus?token=${cookieToken}&pospId=${"RIA205000002"}&educationStatus=${flag}`)
+.then(async( res)=>{
+   console.log(res)
+}) 
+return res.json({marks:marks,message:`CONGRATULATIONS YOU ARE ${flag} ...!!!🤩🤩`})
 
 }
 if(marks < passingMarks) 
 {
+   console.log("thereeeeeeeeeee");
    flag ="FAILED"
+   let Update_Education_Status = await axios.post(`https://test.ambrela.money/api/updateEducationStatus?token=${cookieToken}&pospId=${"RIA205000002"}&educationStatus=${"failed"}`)
+   .then(async( res)=>{
+      console.log(res.data)
+
+   })
   return res.json({marks:marks,message:`HARD LUCK SORRY....!!!!😔😔 You Are Failed ${flag} `})
 
 }

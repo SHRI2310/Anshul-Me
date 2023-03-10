@@ -30,7 +30,7 @@ const adminSchema = new mongoose.Schema({
         trim: true,
       
 
-    },
+    }
 })
 export const Admin = mongoose.model("Admin", adminSchema)
 

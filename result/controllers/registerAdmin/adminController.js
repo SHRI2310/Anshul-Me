@@ -18,7 +18,7 @@ export const register = tryCatch(async(req,res,next)=>{
          for ( let field of newArr){
         //  console.log(data[field]);
             if(!data[field]){
-                return next(new Error(` is missing`, 400))
+                return next(new Error(`${field} is missing `, 400))
             }
          }
 
