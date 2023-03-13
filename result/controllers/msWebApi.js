@@ -4,17 +4,18 @@ import Error from "../utils/error.js"
 import axios from "axios";
 import { Agent } from "../models/agentData.js";
 import { Customer } from "../models/adminModel/customer.js";
+import { ambrelaUrls } from "../constant.js";
 
 // export const test =mongoose.model("test",{})
 
 
 export const fetchAmbrelaData = tryCatch(async (req, res, next) => {
-    let url = "https://test.ambrela.money/api/ambrela-auth",
-        data = {
+    // let url = "https://partnerapp.ambrela.money/api/ambrela-auth",
+       let data = {
             userName: "MSWebRia",
             password: "M12sRia#1000"
         }
-    const fetchData = await axios.post(url, data);
+    const fetchData = await axios.post(ambrelaUrls.generateToken_URL, data);
     //    console.log(fetchData.data.data.securityCode)
 
     let token = fetchData.data.data.securityCode
@@ -48,12 +49,8 @@ export const getAgentProfile = tryCatch(async (req, res, next) => {
     //     return next(new Error(" you are Not authorised Token or POSPID is invalid", 400))
     // }
 
-
-    let url1 = "https://test.ambrela.money/api/getAgentProfile"
-
-
     // console.log(data)
-    const sendData = await axios.get(url1, { params: params })
+    const sendData = await axios.get(ambrelaUrls.getAgentProfile_URL, { params: params })
     // console.log(sendData)
      
     let checkPospId = await Agent.findOne({"data.pospId":pospId})
@@ -87,13 +84,12 @@ export const getAgentProfile = tryCatch(async (req, res, next) => {
 
 
 export const generateCertificate = tryCatch(async (req, res, next) => {
-    console.log(req)
+   
     const { cookieId } = req.cookies;
     console.log(cookieId, "hhhhhhhhhhhhhhh");
 
     const getAgent = await Agent.findById(cookieId)
-    console.log(getAgent.data)
-
+   
     //  const getAgent = await test. 
     // ${getAgent.data.firstName}  ${getAgent.data.lastName}
     let x = getAgent?.data?.panNo
@@ -108,7 +104,7 @@ export const generateCertificate = tryCatch(async (req, res, next) => {
         panNo: `${x}`,
         aadharNo: `${getAgent?.data?.aadharNo}`
     }
-    console.log(obj);
+  
     // console.log(getAgent.data.aadharNo);
     return res.render("index.hbs", obj);
 
@@ -136,11 +132,11 @@ export const getCustomerProfile = tryCatch(async (req, res, next) => {
     }
 
 
-    let url1 = "https://test.ambrela.money/api/getCustomerProfile"
+    // let url1 = "https://test.ambrela.money/api/getCustomerProfile"
 
 
     // console.log(data)
-    const sendData = await axios.get(url1, { params: params })
+    const sendData = await axios.get(ambrelaUrls.getCustomerProfile_URL, { params: params })
     console.log(sendData)
     await Customer.create(sendData.data.data)
     return res.send(sendData.data)
@@ -152,7 +148,7 @@ export const preFill = tryCatch(async (req, res, next) => {
         userName: "MSWebRia",
         password: "M12sRia#1000"
     }
-    let da = await axios.post("https://test.ambrela.money/api/ambrela-auth", data,
+    let da = await axios.post(ambrelaUrls.getAgentProfile_URL, data,
         { headers: { "Content-Type": "application/json",
        
     } }
@@ -178,9 +174,10 @@ export const preFill = tryCatch(async (req, res, next) => {
     }
 
 
-    let url1 = `https://test.ambrela.money/api/getCustomerProfile?token=${token}`
+  `${ambrelaUrls.getCustomerProfile_URL}?token=${token}`
 
-    const sendData = await axios.get(url1, { params },{headers:{ "Access-Control-Allow-Credentials": true}})
+    const sendData = await axios.get(  `${ambrelaUrls.getCustomerProfile_URL}?token=${token}`
+    , { params },{headers:{ "Access-Control-Allow-Credentials": true}})
 
     // console.log(sendData);
     return res.send(sendData.data)

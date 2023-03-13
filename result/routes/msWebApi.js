@@ -3,7 +3,7 @@ import{fetchAmbrelaData, generateCertificate, getAgentProfile,getAllAgents,getCu
 
 const router = express.Router()
 
- router.post("/ambrela",fetchAmbrelaData);
+ router.post("/ambrela-auth",fetchAmbrelaData);
  router.get("/api/getAgentProfile",getAgentProfile)
  router.get("/api/getCustomerProfile",getCustomerProfile)
 router.get("/certificate",generateCertificate)
